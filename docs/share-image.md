@@ -1,0 +1,1 @@
+Generated with the built-in image-generation tool. Prompt: Landscape social-sharing card for SYNCORD. Exact supporting text: ALTERNATIVE SOUNDTRACK CINEMA; A LOST WORLD. A NEW FREQUENCY. Film reel and vinyl record with coral sound wave, prehistoric jungle silhouettes, charcoal and ivory editorial typography. Asset: assets/share-preview-v1.png.

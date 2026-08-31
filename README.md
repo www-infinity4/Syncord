@@ -35,3 +35,6 @@ Media streams from the providers; no movie or music files are stored here. Sourc
 For developers only: install Node.js and run `npm install`, then `npm run build`. Commit updated source **and** regenerated `app.js` / `styles.css`. Normal visitors and Pages hosting need none of these tools. Keep keys and personal data out of this public repository.
 
 The original hosted app is unchanged by this export. No wallet, payouts, live AI curator, or sign-in service is included.
+
+## Sharing and unified wallet
+A shared wallet bar offers native sharing, copy-link fallback, and an X post composer. Confirmed sharing earns 0.1 StarCoin once per site per wallet. Opening a composer or copying a link alone earns nothing; manual confirmation is self-reported. Credits use the same browser-local wallet as StarQuest’s unified-wallet integration, not its separate cloud ledger. Pending claims retry on return. Social preview metadata is in index.html and the card is assets/share-preview-v1.png.
