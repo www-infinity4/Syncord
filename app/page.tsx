@@ -81,18 +81,18 @@ export default function Home() {
       if (!active.current) return;
       music.current?.pauseVideo();
       setPlaying(false);
-      setMessage("The movie could not start. Use its Play control or try Restart pairing.");
+      setMessage("The movie could not start. Use its Play control or try Re-sync both.");
     });
     setStarted(true);
     setPlaying(true);
-    setMessage("Playback requested for both players. If music is silent, tap Play in the album player. Ads and buffering can shift the pairing.");
+    setMessage(restart ? "Re-sync requested: movie and album restarted together from the opening point." : "Playback requested for both players. If music is silent, tap Play in the album player. Ads and buffering can shift the pairing; use Re-sync both afterward.");
   }
   function pause() {
     active.current = false;
     video.current?.pause();
     music.current?.pauseVideo();
     setPlaying(false);
-    setMessage("Both players paused. Resume keeps your position; Restart begins both again.");
+    setMessage("Both players paused. Resume keeps your position; Re-sync both restarts the pairing together.");
   }
 
   return (
@@ -101,13 +101,13 @@ export default function Home() {
       <section className="intro"><div><p className="eyebrow">1925 PICTURE · 1977 SOUND</p><h1>A LOST WORLD.<br/><em>A NEW FREQUENCY.</em></h1></div><p className="intro-note">An expedition into the unexpected.<br/>The Lost World × Book of Dreams.</p></section>
       <section className="theater" aria-label="Movie and album players">
         <div className="film-panel"><div className="panel-label"><span>01 / THE PICTURE</span><span>ORIGINAL AUDIO MUTED</span></div>
-          <video ref={video} src={film} controls muted playsInline preload="metadata" aria-label="The Lost World, 1925, muted film" onVolumeChange={() => { if (video.current) video.current.muted = true; }} onError={() => { setFilmError(true); pause(); }} onEnded={() => { pause(); setMessage("The expedition is over. Restart to explore the pairing again."); }} />
+          <video ref={video} src={film} controls muted playsInline preload="metadata" aria-label="The Lost World, 1925, muted film" onVolumeChange={() => { if (video.current) video.current.muted = true; }} onError={() => { setFilmError(true); pause(); }} onEnded={() => { pause(); setMessage("The expedition is over. Re-sync both to explore the pairing again."); }} />
           {filmError && <p className="error" role="alert">The Archive movie could not load. Try reloading, or check the film source below. Nothing has been uploaded.</p>}
           <div className="film-caption"><div><p className="eyebrow">HARRY O. HOYT / 1925</p><h2>The Lost World</h2></div><p>76 MIN<br/>SILENT ADVENTURE</p></div>
         </div>
-        <aside><div className="panel-label"><span>02 / THE SOUND</span><span className="loop">↻ ALBUM REPEAT</span></div><div className="sound-content"><p className="eyebrow">STEVE MILLER BAND / 1977</p><h2>Book of<br/>Dreams</h2><div className="album-player" ref={mount} aria-label="Book of Dreams YouTube album player"/><div className="controls"><Button className="start" disabled={!ready || filmError} onClick={() => playing ? pause() : play()}>{playing ? "Ⅱ Pause pairing" : started ? "▶ Resume pairing" : "▶ Start pairing"}</Button><Button className="restart" variant="outline" disabled={!ready || filmError} onClick={() => play(true)}>↻ Restart</Button></div><p className="status" role="status">{message}</p><p className="fine">Use the pairing buttons for both players. Their individual controls work separately. The album is set to loop; this is an experimental pairing, not frame-locked synchronization.</p></div></aside>
+        <aside><div className="panel-label"><span>02 / THE SOUND</span><span className="loop">↻ ALBUM REPEAT</span></div><div className="sound-content"><p className="eyebrow">STEVE MILLER BAND / 1977</p><h2>Book of<br/>Dreams</h2><div className="album-player" ref={mount} aria-label="Book of Dreams YouTube album player"/><div className="controls"><Button className="start" disabled={!ready || filmError} onClick={() => playing ? pause() : play()}>{playing ? "Ⅱ Pause pairing" : started ? "▶ Resume pairing" : "▶ Start pairing"}</Button><Button className="restart" variant="outline" disabled={!ready || filmError} onClick={() => play(true)}>↻ Re-sync both</Button></div><p className="status" role="status">{message}</p><p className="fine">If a YouTube ad or buffering delay moves the soundtrack out of step, use Re-sync both. It restarts the picture and album together; Syncord does not remove or bypass YouTube advertising.</p></div></aside>
       </section>
-      <section className="notes" aria-label="Curator notes"><article><p className="eyebrow">THE CURATOR’S PICK</p><h3>Wonder meets wanderlust.</h3><p>I chose this expedition’s strange landscapes and stop-motion creatures for the album’s mix of drifting textures and driving rock. Look for accidental connections—not a pre-scripted match.</p></article><article><p className="eyebrow">THE WAY TO WATCH</p><h3>Picture quiet. Dreams loud.</h3><p>Start from the beginning of both. The film stays muted, the full album playlist repeats, and everything plays here. No file uploads or Archive-player double tap.</p></article><article><p className="eyebrow">THE ORIGINAL SOURCES</p><h3>Two works. One experiment.</h3><p><a href="https://archive.org/details/TheLostWorldCompleteVideoQualityUpgrade" target="_blank" rel="noreferrer">Film on Internet Archive ↗</a><br/><a href={`https://www.youtube.com/playlist?list=${album}`} target="_blank" rel="noreferrer">Album on YouTube ↗</a></p><p>Archive lists this film copy as public domain. Music remains in YouTube’s player, with its availability and advertising rules.</p></article></section>
+      <section className="notes" aria-label="Curator notes"><article><p className="eyebrow">THE CURATOR’S PICK</p><h3>Wonder meets wanderlust.</h3><p>I chose this expedition’s strange landscapes and stop-motion creatures for the album’s mix of drifting textures and driving rock. Look for accidental connections—not a pre-scripted match.</p></article><article><p className="eyebrow">THE WAY TO WATCH</p><h3>Picture quiet. Dreams loud.</h3><p>Start from the beginning of both. The film stays muted, the full album playlist repeats, and Re-sync recovers the pairing after ads or delays.</p></article><article><p className="eyebrow">THE ORIGINAL SOURCES</p><h3>Two works. One experiment.</h3><p><a href="https://archive.org/details/TheLostWorldCompleteVideoQualityUpgrade" target="_blank" rel="noreferrer">Film on Internet Archive ↗</a><br/><a href={`https://www.youtube.com/playlist?list=${album}`} target="_blank" rel="noreferrer">Album on YouTube ↗</a></p><p>Archive lists this film copy as public domain. Music remains in YouTube’s player, with its availability and advertising rules.</p></article></section>
       <footer><span>SYNCORD</span><p>Different decades. Unexpected company.</p><span>CURATED PAIRING / 001</span></footer>
     </main>
   );
